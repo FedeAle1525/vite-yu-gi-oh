@@ -34,7 +34,8 @@ export default {
 <template>
   <main>
     <div class="container">
-      <Card v-for="card in cards" :key="card.id" :card="card" />
+      <Card v-for="card in cards" :key="card.id" :srcImg="card.card_images[0].image_url" :name="card.name"
+        :archetype="card.archetype" />
     </div>
   </main>
 </template>

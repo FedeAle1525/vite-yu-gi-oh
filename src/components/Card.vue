@@ -1,9 +1,19 @@
 <script>
 export default {
   props: {
-    card: {
-      type: Object,
+    srcImg: {
+      type: String,
       required: true
+    },
+    name: {
+      type: String,
+      required: true,
+      default: "NO NAME"
+    },
+    archetype: {
+      type: String,
+      required: true,
+      default: "NO ARCHETYPE"
     }
   }
 }
@@ -12,11 +22,11 @@ export default {
 <template>
   <div class="card">
 
-    <img :src="card.card_images[0].image_url">
+    <img :src="srcImg">
 
     <div class="card-info">
-      <span class="name">{{ card.name }}</span>
-      <span class="archetype">{{ card.archetype }}</span>
+      <span class="name">{{ name }}</span>
+      <span class="archetype">{{ archetype }}</span>
     </div>
   </div>
 </template>
