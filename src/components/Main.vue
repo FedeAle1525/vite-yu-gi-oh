@@ -1,5 +1,26 @@
 <script>
+import axios from 'axios';
+
 export default {
+  data() {
+    return {
+      cards: [],
+    }
+  },
+
+  methods: {
+    getCardsFromServer() {
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+        .then((res) => {
+          this.cards = res.data.data;
+          console.log(this.cards);
+        })
+    }
+  },
+
+  mounted() {
+    this.getCardsFromServer();
+  }
 
 }
 </script>
