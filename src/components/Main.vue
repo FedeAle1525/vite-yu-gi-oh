@@ -26,8 +26,16 @@ export default {
         })
     },
 
-    filterByName() {
-      axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0&fname=${store.filterName}`)
+    // Funzione che esegue chiamata al Server con Parametri da componente Filters (Figlio)
+    filterByParam() {
+      axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
+        params: {
+          num: 20,
+          offset: 0,
+          fname: store.filterName,
+          type: store.filterType
+        }
+      })
         .then((res) => {
           this.store.cards = res.data.data;
         })
@@ -44,8 +52,8 @@ export default {
 <template>
   <main>
 
-    <!-- Ascolto Evento Personalizzato "searchName" (in Figlio) e reagisco con Funzione "filterByName"  -->
-    <Filters @searchName="filterByName()" />
+    <!-- Ascolto Evento Personalizzato "searchName" e "searchType" (in Figlio) e reagisco con Funzione "filterByName"  -->
+    <Filters @searchName="filterByParam()" @searchType="filterByParam()" />
 
     <div class="container">
       <Card v-for="card in store.cards" :key="card.id" :srcImg="card.card_images[0].image_url" :name="card.name"
