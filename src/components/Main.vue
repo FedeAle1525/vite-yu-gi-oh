@@ -28,33 +28,50 @@ export default {
 
     // Funzione che esegue chiamata al Server con Parametri da componente Filters (Figlio)
     filterByParam() {
-      if (store.filterType === '') {
+      // Con Type='' ho un Errore del Server. quindi effettuo chiamata solo con paramentro Fname
+      // if (store.filterType === '') {
 
-        axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
-          params: {
-            num: 20,
-            offset: 0,
-            fname: store.filterName,
-          }
+      //   axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
+      //     params: {
+      //       num: 20,
+      //       offset: 0,
+      //       fname: store.filterName,
+      //     }
+      //   })
+      //     .then((res) => {
+      //       this.store.cards = res.data.data;
+      //     })
+
+      // } else {
+
+      axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
+        params: {
+          num: 20,
+          offset: 0,
+          fname: store.filterName,
+          type: store.filterType
+        }
+      })
+        .then((res) => {
+          this.store.cards = res.data.data;
         })
-          .then((res) => {
-            this.store.cards = res.data.data;
+
+        // Con Type='' ho un Errore del Server che intercetto con ".catch" quindi effettuo chiamata solo con paramentro Fname
+        .catch(() => {
+          axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
+
+            params: {
+              num: 20,
+              offset: 0,
+              fname: store.filterName,
+            }
           })
-
-      } else {
-
-        axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
-          params: {
-            num: 20,
-            offset: 0,
-            fname: store.filterName,
-            type: store.filterType
-          }
+            .then((res) => {
+              this.store.cards = res.data.data;
+            })
         })
-          .then((res) => {
-            this.store.cards = res.data.data;
-          })
-      }
+
+      // }
 
     }
   },
