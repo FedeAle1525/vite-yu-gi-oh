@@ -24,6 +24,13 @@ export default {
           this.store.cards = res.data.data;
           // console.log(this.cards);
         })
+    },
+
+    filterByName() {
+      axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0&fname=${store.filterName}`)
+        .then((res) => {
+          this.store.cards = res.data.data;
+        })
     }
   },
 
@@ -37,7 +44,8 @@ export default {
 <template>
   <main>
 
-    <Filters />
+    <!-- Ascolto Evento Personalizzato "searchName" (in Figlio) e reagisco con Funzione "filterByName"  -->
+    <Filters @searchName="filterByName()" />
 
     <div class="container">
       <Card v-for="card in store.cards" :key="card.id" :srcImg="card.card_images[0].image_url" :name="card.name"

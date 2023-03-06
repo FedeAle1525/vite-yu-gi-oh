@@ -13,7 +13,8 @@ export default {
 
 <template>
   <div class="container">
-    <input type="text" placeholder="Filtra per Nome" v-model="store.filterName">
+    <!-- Con $emit creo Evento Personalizzato per ascoltare Evento "keyup.enter" -->
+    <input type="text" placeholder="Filtra per Nome" v-model="store.filterName" @keyup.enter='$emit("searchName")'>
 
     <select id="" v-model="store.type">
       <option v-for="(type, i) in types" :key="i" :value="type"> {{ type.toUpperCase() }} </option>
