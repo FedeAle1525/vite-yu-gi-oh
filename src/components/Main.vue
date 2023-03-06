@@ -1,12 +1,14 @@
 <script>
 import axios from 'axios';
+import Filters from './Filters.vue';
 import Card from './Card.vue';
 import store from '../store';
 
 export default {
 
   components: {
-    Card
+    Card,
+    Filters
   },
 
   data() {
@@ -34,6 +36,9 @@ export default {
 
 <template>
   <main>
+
+    <Filters />
+
     <div class="container">
       <Card v-for="card in store.cards" :key="card.id" :srcImg="card.card_images[0].image_url" :name="card.name"
         :archetype="card.archetype" />
