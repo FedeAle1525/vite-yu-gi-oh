@@ -1,8 +1,11 @@
 <script>
+import store from '../store';
+
 export default {
   data() {
     return {
-      types: ['no type', 'normal monster', 'effect monster', 'synchro monster', 'spell card', 'trap card']
+      types: ['no type', 'normal monster', 'effect monster', 'synchro monster', 'spell card', 'trap card'],
+      store
     }
   }
 }
@@ -10,9 +13,9 @@ export default {
 
 <template>
   <div class="container">
-    <input type="text" placeholder="Filtra per Nome">
+    <input type="text" placeholder="Filtra per Nome" v-model="store.filterName">
 
-    <select id="">
+    <select id="" v-model="store.type">
       <option v-for="(type, i) in types" :key="i" :value="type"> {{ type.toUpperCase() }} </option>
     </select>
   </div>

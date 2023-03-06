@@ -4,7 +4,9 @@ import { reactive } from 'vue';
 const store = reactive({
 
   // 2 - Inserisco Dati da salvare dentro lo Store
-  cards: []
+  cards: [],
+  filterName: '',
+  type: ''
 })
 
 // 3 - Rendo i Dati di Store accessibili esportandoli
