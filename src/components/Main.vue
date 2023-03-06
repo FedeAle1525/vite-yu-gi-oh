@@ -28,17 +28,34 @@ export default {
 
     // Funzione che esegue chiamata al Server con Parametri da componente Filters (Figlio)
     filterByParam() {
-      axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
-        params: {
-          num: 20,
-          offset: 0,
-          fname: store.filterName,
-          type: store.filterType
-        }
-      })
-        .then((res) => {
-          this.store.cards = res.data.data;
+      if (store.filterType === '') {
+
+        axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
+          params: {
+            num: 20,
+            offset: 0,
+            fname: store.filterName,
+          }
         })
+          .then((res) => {
+            this.store.cards = res.data.data;
+          })
+
+      } else {
+
+        axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`, {
+          params: {
+            num: 20,
+            offset: 0,
+            fname: store.filterName,
+            type: store.filterType
+          }
+        })
+          .then((res) => {
+            this.store.cards = res.data.data;
+          })
+      }
+
     }
   },
 
